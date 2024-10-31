@@ -12,8 +12,24 @@
 </head>
 <body>
     <div id="app" v-cloak>
-        <!-- 保持原有header部分不变 -->
-        
+        <header class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                    <h1>匠心传承 • 非遗新生</h1>
+                    <div class="subtitle">山西非遗建筑艺术展</div>
+                </div>
+                <div class="hero-description" data-aos="fade-up" data-aos-delay="400">
+                    <p>以艺术之眼，观山西古建之美</p>
+                    <p>融合游戏文化，传承千年匠心</p>
+                </div>
+                <div class="hero-scroll" data-aos="fade-up" data-aos-delay="600">
+                    <span>向下滚动探索更多</span>
+                    <div class="scroll-indicator"></div>
+                </div>
+            </div>
+        </header>
+
         <nav class="main-nav">
             <ul>
                 <li v-for="section in ['about', 'artwork', 'heritage', 'digital', 'feedback']">
