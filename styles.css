@@ -964,3 +964,495 @@ model-viewer {
         align-items: center;
     }
 }
+
+/* 叶雕艺术描述区域样式优化 */
+.leaf-art-description {
+    position: relative;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 252, 245, 0.95));
+    border-radius: 15px;
+    box-shadow: 
+        0 10px 30px rgba(31, 38, 135, 0.1),
+        0 4px 6px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+}
+
+/* 移除原有的装饰边框 */
+.leaf-art-description::before {
+    display: none;
+}
+
+/* 添加古风装饰元素 */
+.leaf-art-description::after {
+    content: '叶';
+    position: absolute;
+    top: -15px;
+    right: 30px;
+    font-family: "STXingkai", "华文行楷", serif;
+    font-size: 4rem;
+    color: rgba(139, 0, 0, 0.1);
+    transform: rotate(15deg);
+}
+
+.leaf-art-content {
+    position: relative;
+    padding: 20px;
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.8), rgba(248, 248, 248, 0.8));
+    border-radius: 10px;
+    z-index: 1;
+}
+
+/* 段落样式优化 */
+.leaf-art-content p {
+    position: relative;
+    margin-bottom: 1.5rem;
+    line-height: 2;
+    color: #333;
+    text-align: justify;
+    text-indent: 2em;
+    font-size: 1.1rem;
+    font-family: "STKaiti", "华文楷体", serif;
+    padding-left: 1rem;
+}
+
+/* 添加段落装饰 */
+.leaf-art-content p::before {
+    content: '❖';
+    position: absolute;
+    left: -5px;
+    color: var(--accent-color);
+    opacity: 0.6;
+    font-size: 0.8rem;
+}
+
+/* 首段特殊样式 */
+.leaf-art-content p:first-child {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* 添加文字渐变效果 */
+.leaf-art-content p:first-child::first-letter {
+    font-size: 2.5em;
+    float: left;
+    margin-right: 0.1em;
+    line-height: 1;
+    color: transparent;
+    background: linear-gradient(45deg, #8B0000, #A77E58);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* 悬停效果优化 */
+.leaf-art-description:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 35px rgba(31, 38, 135, 0.15),
+        0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 添加文字块装饰角 */
+.leaf-art-content::before,
+.leaf-art-content::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--accent-color);
+    opacity: 0.5;
+}
+
+.leaf-art-content::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+}
+
+.leaf-art-content::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+}
+
+/* 响应式适配优化 */
+@media (max-width: 768px) {
+    .leaf-art-description {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .leaf-art-content p {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+    
+    .leaf-art-content p:first-child {
+        font-size: 1.1rem;
+    }
+    
+    .leaf-art-description::after {
+        font-size: 3rem;
+        top: -10px;
+        right: 20px;
+    }
+}
+
+/* 添加文字选中效果 */
+.leaf-art-content p::selection {
+    background: rgba(139, 0, 0, 0.2);
+    color: var(--primary-color);
+}
+
+/* 添加滚动条美化 */
+.leaf-art-description {
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) transparent;
+}
+
+.leaf-art-description::-webkit-scrollbar {
+    width: 6px;
+}
+
+.leaf-art-description::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.leaf-art-description::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 3px;
+}
+
+/* 叶雕艺术展示区布局 */
+.leaf-art-container {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1400px;
+    padding: 0 2rem;
+}
+
+/* 叶雕作品图片展示区 */
+.leaf-art-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* 叶雕作品图片容器 */
+.leaf-art-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* 图片基础样式 */
+.leaf-art-image img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border: 3px solid;
+    border-image: linear-gradient(to bottom, #8B0000, #DAA520) 1;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 图片悬停效果 */
+.leaf-art-image:hover img {
+    transform: scale(1.1) rotate(1deg);
+    border-image: linear-gradient(to bottom, #B8860B, #800000) 1;
+    filter: brightness(0.8);
+}
+
+/* 图片信息遮罩 */
+.image-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8),
+        rgba(0, 0, 0, 0)
+    );
+    color: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 遮罩层悬停效果 */
+.leaf-art-image:hover .image-overlay {
+    bottom: 0;
+}
+
+.image-overlay h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-family: "STKaiti", "华文楷体", serif;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.1s;
+}
+
+.image-overlay p {
+    font-size: 1rem;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.2s;
+}
+
+.leaf-art-image:hover .image-overlay h4,
+.leaf-art-image:hover .image-overlay p {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .leaf-art-container {
+        grid-template-columns: 1fr 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .leaf-art-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .leaf-art-gallery {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .leaf-art-image {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 576px) {
+    .leaf-art-image {
+        width: 100%;
+    }
+    
+    .leaf-art-image img {
+        height: 200px;
+    }
+}
+/* 添加加载动画 */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.leaf-art-image.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 25%,
+        #e0e0e0 50%,
+        #f0f0f0 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* 使用 picture 元素优化图片加载 */
+.leaf-art-image picture {
+    width: 100%;
+    height: 100%;
+}
+
+/* 添加懒加载支持 */
+.leaf-art-image img {
+    loading: lazy;
+}
+
+/* 使用 Container Queries（需要浏览器支持） */
+@container (min-width: 400px) {
+    .leaf-art-image {
+        aspect-ratio: 16/9;
+    }
+}
+
+/* 纸雕艺术容器样式 */
+.paper-art-container,
+.paper-cut-container {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1400px;
+    padding: 0 2rem;
+}
+
+/* 描述区域样式 */
+.paper-art-description,
+.paper-cut-description {
+    position: relative;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 252, 245, 0.95));
+    border-radius: 15px;
+    box-shadow: 
+        0 10px 30px rgba(31, 38, 135, 0.1),
+        0 4px 6px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+}
+
+/* 装饰元素 */
+.paper-art-description::after {
+    content: '纸';
+    position: absolute;
+    top: -15px;
+    right: 30px;
+    font-family: "STXingkai", "华文行楷", serif;
+    font-size: 4rem;
+    color: rgba(139, 0, 0, 0.1);
+    transform: rotate(15deg);
+}
+
+.paper-cut-description::after {
+    content: '剪';
+    position: absolute;
+    top: -15px;
+    right: 30px;
+    font-family: "STXingkai", "华文行楷", serif;
+    font-size: 4rem;
+    color: rgba(139, 0, 0, 0.1);
+    transform: rotate(15deg);
+}
+
+/* 内容样式 */
+.paper-art-content,
+.paper-cut-content {
+    position: relative;
+    padding: 20px;
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.8), rgba(248, 248, 248, 0.8));
+    border-radius: 10px;
+    z-index: 1;
+}
+
+/* 段落样式 */
+.paper-art-content p,
+.paper-cut-content p {
+    position: relative;
+    margin-bottom: 1.5rem;
+    line-height: 2;
+    color: #333;
+    text-align: justify;
+    text-indent: 2em;
+    font-size: 1.1rem;
+    font-family: "STKaiti", "华文楷体", serif;
+    padding-left: 1rem;
+}
+
+/* 段落装饰 */
+.paper-art-content p::before,
+.paper-cut-content p::before {
+    content: '❖';
+    position: absolute;
+    left: -5px;
+    color: var(--accent-color);
+    opacity: 0.6;
+    font-size: 0.8rem;
+}
+
+/* 首段特殊样式 */
+.paper-art-content p:first-child,
+.paper-cut-content p:first-child {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* 首字母特殊效果 */
+.paper-art-content p:first-child::first-letter,
+.paper-cut-content p:first-child::first-letter {
+    font-size: 2.5em;
+    float: left;
+    margin-right: 0.1em;
+    line-height: 1;
+    color: transparent;
+    background: linear-gradient(45deg, #8B0000, #A77E58);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* 图片展示区样式 */
+.paper-art-gallery,
+.paper-cut-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.paper-art-image,
+.paper-cut-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .paper-art-container,
+    .paper-cut-container {
+        grid-template-columns: 1fr 350px;
+    }
+    
+    .paper-art-image img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 992px) {
+    .paper-art-container,
+    .paper-cut-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .paper-art-gallery,
+    .paper-cut-gallery {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .paper-art-image,
+    .paper-cut-image {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 576px) {
+    .paper-art-image,
+    .paper-cut-image {
+        width: 100%;
+    }
+    
+    .paper-art-image img,
+    .paper-cut-image img {
+        height: 200px;
+    }
+}
+

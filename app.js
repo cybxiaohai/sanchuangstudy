@@ -1,67 +1,36 @@
-const app = Vue.createApp({
-    data() {
-        return {
-            activeSection: 'about',
-            feedbacks: [
-                {
-                    id: 1,
-                    name: '张三',
-                    avatar: 'images/avatar1.jpg',
-                    content: '将游戏元素与传统文化结合的方式非常新颖，让年轻人更容易接受传统文化。',
-                    rating: 5
-                },
-                {
-                    id: 2,
-                    name: '李四',
-                    avatar: 'images/avatar2.jpg',
-                    content: '叶雕作品太精美了，完美展现了古建筑的韵味。',
-                    rating: 5
-                }
-            ],
-            newFeedback: {
-                name: '',
-                email: '',
-                message: '',
-                rating: 5
-            },
-            buildings: [
-                {
-                    id: 1,
-                    name: '平遥古城',
-                    image: 'images/building-1.jpg',
-                    description: '世界文化遗产，保存完整的明清古城'
-                },
-                {
-                    id: 2,
-                    name: '大同华严寺',
-                    image: 'images/building-2.jpg',
-                    description: '辽金时期建筑，具有独特的建筑艺术价值'
-                }
-            ]
-        }
-    },
-    methods: {
-        submitFeedback() {
-            // 处理表单提交
-            this.feedbacks.push({
-                id: this.feedbacks.length + 1,
-                name: this.newFeedback.name,
-                content: this.newFeedback.message,
-                rating: this.newFeedback.rating,
-                avatar: 'images/default-avatar.jpg'
-            });
-            // 重置表单
-            this.newFeedback = {
-                name: '',
-                email: '',
-                message: '',
-                rating: 5
-            };
-        },
-        setActiveSection(section) {
-            this.activeSection = section;
-        }
-    }
-});
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取所有标签按钮和内容容器
+    const tabButtons = document.querySelectorAll('.category-tabs .tab-btn');
+    const containers = {
+        '叶雕艺术': document.querySelector('.leaf-art-container'),
+        '立体纸雕': document.querySelector('.paper-art-container'),
+        '传统剪纸': document.querySelector('.paper-cut-container')
+    };
 
-app.mount('#app'); 
+    // 标签切换功能
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // 移除所有按钮的活动状态
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // 隐藏所有容器
+            Object.values(containers).forEach(container => {
+                if (container) {
+                    container.style.display = 'none';
+                }
+            });
+            
+            // 激活当前按钮
+            this.classList.add('active');
+            
+            // 显示对应容器
+            const containerName = this.textContent;
+            if (containers[containerName]) {
+                containers[containerName].style.display = 'grid';
+            }
+        });
+    });
+
+    // 初始化显示第一个容器
+    containers['叶雕艺术'].style.display = 'grid';
+}); 

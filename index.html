@@ -6,6 +6,7 @@
     <title>山西非遗建筑艺术展</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
     <header class="hero">
@@ -63,19 +64,128 @@
                     <button class="tab-btn">立体纸雕</button>
                     <button class="tab-btn">传统剪纸</button>
                 </div>
-                <div class="art-grid">
-                    <div class="art-item">
-                        <div class="art-content">
-                            <h3>平遥古城印象</h3>
-                            <p class="art-description">以叶脉勾勒古城轮廓，展现千年古城的沧桑与底蕴。</p>
-                            <div class="art-tags">
-                                <span class="tag">叶雕</span>
-                                <span class="tag">建筑</span>
-                                <span class="tag">文化</span>
+                <div class="leaf-art-container">
+                    <div class="leaf-art-description" data-aos="fade-right">
+                        <div class="leaf-art-content">
+                            <p><span>叶雕</span>，又称剪叶，是通过独具匠心的手工，在风韵独具的片片落叶上精雕细琢，精美的图案就跃然而上。</p>
+                            <p>叶雕作品古朴自然，每片叶雕向人诉说着一个传说，一个故事，阐述着一种历史文化，从片片叶雕上领略到博大精深的中国传统文化与现代技术的完美结合。</p>
+                            <p>叶雕在艺术创作的美学原则上与其他艺术既有共同之处，又有独到的特点。叶雕具备了版画微雕、剪纸等艺术的表现形式，又吸收它们创作的长处，补其短处。</p>
+                            <p>不同之处，就在于叶雕是采用自然叶片的自然形态，巧借天然，突出意趣，顺其自然来展示大自然巧夺天工与天人合一之景象，利用树叶纵横交织的脉络、自然残缺来创造出叶片的生命状态，造就神奇的艺术瞬间,使作品源于自然而高于自然。</p>
+                            <p>叶雕制作工序复杂、技艺难度高、叶片选取与图案的配合设计匠心独运，其作品异常精美图案丰富、工艺精密更是非比寻常，集中体现了中华民族传统美学上虚拟、暗示、借代等文化技巧，正所谓"小蝉翼大世界"。</p>
+                        </div>
+                    </div>
+                    <div class="leaf-art-gallery">
+                        <div class="leaf-art-image" data-aos="fade-left" data-aos-delay="0">
+                            <picture>
+                                <source srcset="images/叶雕作品1.webp" type="image/webp">
+                                <source srcset="images/叶雕作品1.jpg" type="image/jpeg">
+                                <img src="images/叶雕作品1.jpg" alt="叶雕作品1 - 山西古建印象" loading="lazy">
+                            </picture>
+                            <div class="image-overlay">
+                                <h4>山西古建印象</h4>
+                                <p>以叶脉勾勒平遥古城轮廓</p>
+                            </div>
+                        </div>
+                        <div class="leaf-art-image" data-aos="fade-left" data-aos-delay="200">
+                            <picture>
+                                <source srcset="images/叶雕作品2.webp" type="image/webp">
+                                <source srcset="images/叶雕作品2.jpg" type="image/jpeg">
+                                <img src="images/叶雕作品2.jpg" alt="叶雕作品2 - 华严寺塔影" loading="lazy">
+                            </picture>
+                            <div class="image-overlay">
+                                <h4>华严寺塔影</h4>
+                                <p>叶片镂刻大同华严寺塔</p>
+                            </div>
+                        </div>
+                        <div class="leaf-art-image" data-aos="fade-left" data-aos-delay="400">
+                            <picture>
+                                <source srcset="images/叶雕作品3.webp" type="image/webp">
+                                <source srcset="images/叶雕作品3.jpg" type="image/jpeg">
+                                <img src="images/叶雕作品3.jpg" alt="叶雕作品3 - 晋派建筑韵" loading="lazy">
+                            </picture>
+                            <div class="image-overlay">
+                                <h4>晋派建筑韵</h4>
+                                <p>展现晋派建筑特色元素</p>
                             </div>
                         </div>
                     </div>
-                    <!-- 更多艺术作品... -->
+                </div>
+                <div class="paper-art-container" style="display: none;">
+                    <div class="paper-art-description" data-aos="fade-right">
+                        <div class="paper-art-content">
+                            <p><span>纸雕</span>，也叫纸浮雕。它的起源可以追溯到中国汉朝纸的发明及16世纪德国对纸的改良成果。纸雕是一种以纸为素材、使用刀具塑形的工艺。</p>
+                            <p>纸作为立体形式的表现物出现得很早，中国很早就有手工扎作而成的人物。18世纪中叶，欧洲一群喜爱创作的艺术家开启了纸雕艺术的大门，他们利用简单的工具及不同的纸张，创作出许多主题式的纸雕作品。</p>
+                            <p>17世纪的英国著名纸雕艺术先驱奥古丁．华克，在1760年完成的两幅海洋作品仍保留在英国格林威治国家海洋博物馆内。</p>
+                            <p>而纸雕的又一流派，刻版纸雕是一种以纸为素材、以刀为辅助工具创作的工艺。它过采用先进的新型柔韧纸张，用锋利的手术刀在纸上进行雕刻，最终成型。在刻版纸雕的发展过程中，它逐渐吸收了版画和工笔画的特点，同时在内容题材上不断创新，最终自成一家。</p>
+                        </div>
+                    </div>
+                    <div class="paper-art-gallery">
+                        <div class="paper-art-image" data-aos="fade-left" data-aos-delay="0">
+                            <img src="images/纸雕1.jpg" alt="纸雕作品1 - 承泽园景" loading="lazy">
+                            <div class="image-overlay">
+                                <h4>承泽园景</h4>
+                                <p>纸雕灯的设计灵感来源于承泽园景，古色古香的亭子后是现代风格的教学楼，意喻承前启后，继往开来。</p>
+                            </div>
+                        </div>
+                        <div class="paper-art-image" data-aos="fade-left" data-aos-delay="200">
+                            <img src="images/纸雕2.jpg" alt="纸雕作品2 - 江南印象" loading="lazy">
+                            <div class="image-overlay">
+                                <h4>江南印象</h4>
+                                <p>将江南山水、古楼寺庙、山野桃花等元素融合进纸雕上，通过巧妙的排列组合，组成了别样的景致，加上移轴视角，更加蒙上了一层江南风雅和趣味。</p>
+                            </div>
+                        </div>
+                        <div class="paper-art-image" data-aos="fade-left" data-aos-delay="400">
+                            <img src="images/纸雕3.jpg" alt="纸雕作品3 - 千里共婵娟" loading="lazy">
+                            <div class="image-overlay">
+                                <h4>千里共婵娟</h4>
+                                <p>纸雕——千里共婵娟，纸与刀的华丽相逢</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paper-cut-container" style="display: none;">
+                    <div class="paper-cut-description" data-aos="fade-right">
+                        <div class="paper-cut-content">
+                            <p><span>剪纸</span>，陕西剪纸有"活化石"之称，它较完整地传承了中华民族阴阳哲学思想与生殖繁衍崇拜的观念。如古老的造型纹样"鱼身人面""狮身人面"，与周文化相似的"抓髻娃娃"，与汉画像相似的"牛耕图"等。</p>
+                            <p>陕西剪纸因地区不同而风格各异。陕北剪纸淳厚、粗壮，线条有力，剪纹简洁；定边、靖边剪纸较细致，线条多直线，流利奔放；宜川剪纸线条粗而曲线多；关中剪纸线条粗似针尖，风格别致；朝邑剪纸以戏文为多，造型动态近乎皮影；三原剪纸以花卉为主，结构简单，色彩对比强烈；富平剪纸剪纹流利，明暗适调。</p>
+                            <p>总的来看，陕西剪纸造型古拙、风格粗犷、寓意明朗、形式多样，包含着浓郁的泥土气息和鲜明的地域特色。</p>
+                        </div>
+                    </div>
+                    <div class="paper-cut-gallery">
+                        <div class="paper-cut-image" data-aos="fade-left" data-aos-delay="0">
+                            <picture>
+                                <source srcset="images/剪纸作品1.webp" type="image/webp">
+                                <source srcset="images/剪纸作品1.jpg" type="image/jpeg">
+                                <img src="images/剪纸作品1.jpg" alt="剪纸作品1 - 山水剪影" loading="lazy">
+                            </picture>
+                            <div class="image-overlay">
+                                <h4>山水剪影</h4>
+                                <p>传统山水画元素的剪纸演绎</p>
+                            </div>
+                        </div>
+                        <div class="paper-cut-image" data-aos="fade-left" data-aos-delay="200">
+                            <picture>
+                                <source srcset="images/剪纸作品2.webp" type="image/webp">
+                                <source srcset="images/剪纸作品2.jpg" type="image/jpeg">
+                                <img src="images/剪纸作品2.jpg" alt="剪纸作品2 - 花鸟剪影" loading="lazy">
+                            </picture>
+                            <div class="image-overlay">
+                                <h4>花鸟剪影</h4>
+                                <p>传统花鸟画元素的剪纸演绎</p>
+                            </div>
+                        </div>
+                        <div class="paper-cut-image" data-aos="fade-left" data-aos-delay="400">
+                            <picture>
+                                <source srcset="images/剪纸作品3.webp" type="image/webp">
+                                <source srcset="images/剪纸作品3.jpg" type="image/jpeg">
+                                <img src="images/剪纸作品3.jpg" alt="剪纸作品3 - 人物剪影" loading="lazy">
+                            </picture>
+                            <div class="image-overlay">
+                                <h4>人物剪影</h4>
+                                <p>传统人物画元素的剪纸演绎</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -96,7 +206,7 @@
                             <div class="heritage-info">
                                 <p>始建于辽代，是中国现存最大的辽代寺院。</p>
                                 <ul class="heritage-features">
-                                    <li>建筑年代：辽代</li>
+                                    <li>建年代：辽代</li>
                                     <li>建筑类型：寺庙</li>
                                     <li>保护级别：国家重点文物</li>
                                 </ul>
@@ -207,5 +317,6 @@
             once: true
         });
     </script>
+    <script src="app.js"></script>
 </body>
 </html> 
