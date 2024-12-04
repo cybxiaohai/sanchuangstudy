@@ -33,4 +33,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 初始化显示第一个容器
     containers['叶雕艺术'].style.display = 'grid';
+
+    // 添加图片加载动画
+    const artImages = document.querySelectorAll('img');
+    artImages.forEach(img => {
+        img.classList.add('loading');
+        img.onload = function() {
+            this.classList.remove('loading');
+        }
+    });
+
+    // 添加滚动动画
+    const artContainers = document.querySelectorAll('.leaf-art-container, .paper-art-container, .paper-cut-container');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    artContainers.forEach(container => {
+        container.style.opacity = '0';
+        container.style.transform = 'translateY(50px)';
+        container.style.transition = 'all 0.8s ease-out';
+        observer.observe(container);
+    });
+
+    // 添加鼠标跟随水墨效果
+    document.querySelectorAll('.leaf-art-image, .paper-art-image, .paper-cut-image, .leaf-art-content p:first-child, .paper-art-content p:first-child, .paper-cut-content p:first-child').forEach(element => {
+        element.addEventListener('mousemove', (e) => {
+            const rect = e.target.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            element.style.setProperty('--mouse-x', `${x}%`);
+            element.style.setProperty('--mouse-y', `${y}%`);
+        });
+    });
 }); 

@@ -965,7 +965,7 @@ model-viewer {
     }
 }
 
-/* 叶雕艺术描述区域样式优化 */
+/* 叶雕描述区域样式 - 与纸雕保持一致 */
 .leaf-art-description {
     position: relative;
     margin: 2rem auto;
@@ -983,18 +983,7 @@ model-viewer {
     display: none;
 }
 
-/* 添加古风装饰元素 */
-.leaf-art-description::after {
-    content: '叶';
-    position: absolute;
-    top: -15px;
-    right: 30px;
-    font-family: "STXingkai", "华文行楷", serif;
-    font-size: 4rem;
-    color: rgba(139, 0, 0, 0.1);
-    transform: rotate(15deg);
-}
-
+/* 叶雕内容区域样式 */
 .leaf-art-content {
     position: relative;
     padding: 20px;
@@ -1003,7 +992,7 @@ model-viewer {
     z-index: 1;
 }
 
-/* 段落样式优化 */
+/* 段落样式统一 */
 .leaf-art-content p {
     position: relative;
     margin-bottom: 1.5rem;
@@ -1016,7 +1005,7 @@ model-viewer {
     padding-left: 1rem;
 }
 
-/* 添加段落装饰 */
+/* 段落装饰统一 */
 .leaf-art-content p::before {
     content: '❖';
     position: absolute;
@@ -1026,107 +1015,81 @@ model-viewer {
     font-size: 0.8rem;
 }
 
-/* 首段特殊样式 */
-.leaf-art-content p:first-child {
-    font-size: 1.2rem;
-    color: var(--primary-color);
-    font-weight: 500;
+/* 叶雕图片展示区布局 - 改为单列 */
+.leaf-art-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-/* 添加文字渐变效果 */
-.leaf-art-content p:first-child::first-letter {
-    font-size: 2.5em;
-    float: left;
-    margin-right: 0.1em;
-    line-height: 1;
-    color: transparent;
-    background: linear-gradient(45deg, #8B0000, #A77E58);
-    -webkit-background-clip: text;
-    background-clip: text;
+/* 叶雕图片容器样式 */
+.leaf-art-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 2rem;
 }
 
-/* 悬停效果优化 */
-.leaf-art-description:hover {
-    transform: translateY(-5px);
-    box-shadow: 
-        0 15px 35px rgba(31, 38, 135, 0.15),
-        0 5px 15px rgba(0, 0, 0, 0.08);
+/* 叶雕图片基础样式 */
+.leaf-art-image img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border: 3px solid;
+    border-image: linear-gradient(to bottom, #FF69B4, #00CED1) 1;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+/* 叶雕图片悬停效果 */
+.leaf-art-image:hover img {
+    transform: scale(1.1) rotate(1deg);
+    border-image: linear-gradient(to bottom, #FFD700, #9ACD32) 1;
+    filter: brightness(0.8);
+}
+
+/* 叶雕图片信息遮罩 */
+.leaf-art-image .image-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8),
+        rgba(0, 0, 0, 0)
+    );
+    color: white;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 添加文字块装饰角 */
-.leaf-art-content::before,
-.leaf-art-content::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--accent-color);
-    opacity: 0.5;
-}
-
-.leaf-art-content::before {
-    top: 0;
-    left: 0;
-    border-right: none;
-    border-bottom: none;
-}
-
-.leaf-art-content::after {
+/* 遮罩层悬停效果 */
+.leaf-art-image:hover .image-overlay {
     bottom: 0;
-    right: 0;
-    border-left: none;
-    border-top: none;
 }
 
-/* 响应式适配优化 */
-@media (max-width: 768px) {
-    .leaf-art-description {
-        margin: 1rem;
-        padding: 1.5rem;
-    }
-    
-    .leaf-art-content p {
-        font-size: 1rem;
-        line-height: 1.8;
-    }
-    
-    .leaf-art-content p:first-child {
-        font-size: 1.1rem;
-    }
-    
-    .leaf-art-description::after {
-        font-size: 3rem;
-        top: -10px;
-        right: 20px;
-    }
+.leaf-art-image .image-overlay h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-family: "STKaiti", "华文楷体", serif;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.1s;
 }
 
-/* 添加文字选中效果 */
-.leaf-art-content p::selection {
-    background: rgba(139, 0, 0, 0.2);
-    color: var(--primary-color);
+.leaf-art-image .image-overlay p {
+    font-size: 1rem;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.2s;
 }
 
-/* 添加滚动条美化 */
-.leaf-art-description {
-    max-height: 80vh;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-color) transparent;
-}
-
-.leaf-art-description::-webkit-scrollbar {
-    width: 6px;
-}
-
-.leaf-art-description::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.leaf-art-description::-webkit-scrollbar-thumb {
-    background-color: var(--accent-color);
-    border-radius: 3px;
+.leaf-art-image:hover .image-overlay h4,
+.leaf-art-image:hover .image-overlay p {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 /* 叶雕艺术展示区布局 */
@@ -1364,7 +1327,7 @@ model-viewer {
     padding-left: 1rem;
 }
 
-/* 段落装饰 */
+/* ��落装饰 */
 .paper-art-content p::before,
 .paper-cut-content p::before {
     content: '❖';
@@ -1453,6 +1416,957 @@ model-viewer {
     .paper-art-image img,
     .paper-cut-image img {
         height: 200px;
+    }
+}
+
+/* 纸雕图片容器样式 */
+.paper-art-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+/* 纸雕图片基础样式 */
+.paper-art-image img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border: 3px solid;
+    border-image: linear-gradient(to bottom, #FF69B4, #00CED1) 1;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+/* 纸雕图片悬停效果 */
+.paper-art-image:hover img {
+    transform: scale(1.1) rotate(1deg);
+    border-image: linear-gradient(to bottom, #FFD700, #9ACD32) 1;
+    filter: brightness(0.8);
+}
+
+/* 纸雕图片信息遮罩 */
+.paper-art-image .image-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8),
+        rgba(0, 0, 0, 0)
+    );
+    color: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 遮罩层悬停效果 */
+.paper-art-image:hover .image-overlay {
+    bottom: 0;
+}
+
+.paper-art-image .image-overlay h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-family: "STKaiti", "华文楷体", serif;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.1s;
+}
+
+.paper-art-image .image-overlay p {
+    font-size: 1rem;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.2s;
+}
+
+.paper-art-image:hover .image-overlay h4,
+.paper-art-image:hover .image-overlay p {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* 纸雕图片展示区布局 */
+.paper-art-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .paper-art-container {
+        grid-template-columns: 1fr 350px;
+    }
+    
+    .paper-art-image img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 992px) {
+    .paper-art-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .paper-art-gallery {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .paper-art-image {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 576px) {
+    .paper-art-image {
+        width: 100%;
+    }
+    
+    .paper-art-image img {
+        height: 200px;
+    }
+}
+
+/* 艺术展示区通用容器样式 */
+.leaf-art-container,
+.paper-art-container,
+.paper-cut-container {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1400px;
+    padding: 0 2rem;
+    position: relative;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 
+        0 8px 32px rgba(31, 38, 135, 0.15),
+        inset 0 0 2px rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    overflow: hidden;
+}
+
+/* 容器装饰效果 */
+.leaf-art-container::before,
+.paper-art-container::before,
+.paper-cut-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.05) 30%,
+        transparent 70%
+    );
+    animation: rotateGradient 20s linear infinite;
+    pointer-events: none;
+}
+
+/* 描述区域样式优化 */
+.leaf-art-description,
+.paper-art-description,
+.paper-cut-description {
+    position: relative;
+    padding: 2.5rem;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.95),
+        rgba(255, 252, 245, 0.85)
+    );
+    border-radius: 15px;
+    box-shadow: 
+        0 10px 30px rgba(31, 38, 135, 0.1),
+        0 4px 6px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+/* 描述区域悬浮效果 */
+.leaf-art-description:hover,
+.paper-art-description:hover,
+.paper-cut-description:hover {
+    transform: translateY(-5px) rotateX(5deg);
+}
+
+/* 内容区域样式 */
+.leaf-art-content,
+.paper-art-content,
+.paper-cut-content {
+    position: relative;
+    padding: 2rem;
+    background: linear-gradient(
+        to right bottom,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.7)
+    );
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+}
+
+/* 古风装饰边框 */
+.leaf-art-content::before,
+.paper-art-content::before,
+.paper-cut-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color)) border-box;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* 图片展示区域样式 */
+.leaf-art-gallery,
+.paper-art-gallery,
+.paper-cut-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* 图片容器样式 */
+.leaf-art-image,
+.paper-art-image,
+.paper-cut-image {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 图片悬浮效果 */
+.leaf-art-image:hover,
+.paper-art-image:hover,
+.paper-cut-image:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.2),
+        0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 图片样式 */
+.leaf-art-image img,
+.paper-art-image img,
+.paper-cut-image img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border: 3px solid;
+    border-image: linear-gradient(to bottom, #8B0000, #DAA520) 1;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 图片信息遮罩层 */
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8),
+        rgba(0, 0, 0, 0.4),
+        transparent
+    );
+    padding: 2rem 1.5rem;
+    color: white;
+    opacity: 0;
+    transform: translateY(50%);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 遮罩层悬浮效果 */
+.leaf-art-image:hover .image-overlay,
+.paper-art-image:hover .image-overlay,
+.paper-cut-image:hover .image-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 添加动画效果 */
+@keyframes rotateGradient {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes floatAnimation {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 添加水墨效果 */
+.leaf-art-image::after,
+.paper-art-image::after,
+.paper-cut-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(0, 0, 0, 0.3),
+        transparent 70%
+    );
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.leaf-art-image:hover::after,
+.paper-art-image:hover::after,
+.paper-cut-image:hover::after {
+    opacity: 1;
+}
+
+/* 文字水墨效果 */
+.leaf-art-content p,
+.paper-art-content p,
+.paper-cut-content p {
+    position: relative;
+}
+
+.leaf-art-content p::after,
+.paper-art-content p::after,
+.paper-cut-content p::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(139, 0, 0, 0.1) 20%,
+        rgba(139, 0, 0, 0.3) 50%,
+        rgba(139, 0, 0, 0.1) 80%,
+        transparent
+    );
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.5s ease;
+    filter: blur(1px);
+}
+
+.leaf-art-content p:hover::after,
+.paper-art-content p:hover::after,
+.paper-cut-content p:hover::after {
+    transform: scaleX(1);
+}
+
+/* 文字悬停水墨扩散效果 */
+.leaf-art-content p:hover,
+.paper-art-content p:hover,
+.paper-cut-content p:hover {
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* 首段文字特殊水墨效果 */
+.leaf-art-content p:first-child::before,
+.paper-art-content p:first-child::before,
+.paper-cut-content p:first-child::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(139, 0, 0, 0.1),
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
+
+.leaf-art-content p:first-child:hover::before,
+.paper-art-content p:first-child:hover::before,
+.paper-cut-content p:first-child:hover::before {
+    opacity: 1;
+}
+
+/* 统一所有图片的边框样式 */
+.leaf-art-image img,
+.paper-art-image img,
+.paper-cut-image img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border: 3px solid;
+    border-image: linear-gradient(to bottom, #8B0000, #DAA520) 1;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 统一所有图片的悬停效果 */
+.leaf-art-image:hover img,
+.paper-art-image:hover img,
+.paper-cut-image:hover img {
+    transform: scale(1.1) rotate(1deg);
+    border-image: linear-gradient(to bottom, #B8860B, #800000) 1;
+    filter: brightness(0.8);
+}
+
+/* 添加加载动画 */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* 叶雕描述区域装饰字 */
+.leaf-art-description::after {
+    content: '叶';
+    position: absolute;
+    top: -15px;
+    right: 30px;
+    font-family: "STXingkai", "华文行楷", serif;
+    font-size: 4rem;
+    color: rgba(139, 0, 0, 0.1);
+    transform: rotate(15deg);
+}
+
+/* 叶雕首段样式 */
+.leaf-art-content p:first-child {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* 首字下沉效果 */
+.leaf-art-content p:first-child::first-letter {
+    font-size: 2.5em;
+    float: left;
+    margin-right: 0.1em;
+    line-height: 1;
+    color: transparent;
+    background: linear-gradient(45deg, #8B0000, #A77E58);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .leaf-art-description::after {
+        font-size: 3rem;
+        top: -10px;
+        right: 20px;
+    }
+}
+
+/* 艺术展示区域容器特效增强 */
+.leaf-art-container,
+.paper-art-container,
+.paper-cut-container {
+    /* 保持原有样式 */
+    position: relative;
+    /* 增加古风纹理背景 */
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1)),
+        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a77e58' fill-opacity='0.05'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    /* 增强玻璃态效果 */
+    backdrop-filter: blur(10px) saturate(180%);
+    /* 添加多重阴影 */
+    box-shadow: 
+        0 8px 32px rgba(31, 38, 135, 0.15),
+        inset 0 0 2px rgba(255, 255, 255, 0.6),
+        0 0 15px rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(167, 126, 88, 0.1);
+    /* 添加边框渐变 */
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    /* 添加呼吸光效 */
+    animation: containerBreath 3s ease-in-out infinite alternate;
+}
+
+/* 呼吸光效动画 */
+@keyframes containerBreath {
+    0% {
+        box-shadow: 
+            0 8px 32px rgba(31, 38, 135, 0.15),
+            inset 0 0 2px rgba(255, 255, 255, 0.6),
+            0 0 15px rgba(255, 255, 255, 0.3),
+            0 0 30px rgba(167, 126, 88, 0.1);
+    }
+    100% {
+        box-shadow: 
+            0 8px 32px rgba(31, 38, 135, 0.25),
+            inset 0 0 4px rgba(255, 255, 255, 0.8),
+            0 0 25px rgba(255, 255, 255, 0.5),
+            0 0 50px rgba(167, 126, 88, 0.2);
+    }
+}
+
+/* 装饰字增强效果 */
+.leaf-art-description::after,
+.paper-art-description::after,
+.paper-cut-description::after {
+    /* 保持原有样式 */
+    /* 添加水墨效果 */
+    background: linear-gradient(45deg, rgba(139, 0, 0, 0.1), rgba(167, 126, 88, 0.1));
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* 添加发光效果 */
+    text-shadow: 
+        0 0 10px rgba(139, 0, 0, 0.2),
+        0 0 20px rgba(139, 0, 0, 0.1);
+    /* 添加飘动动画 */
+    animation: floatingCharacter 6s ease-in-out infinite;
+}
+
+/* 装饰字飘动动画 */
+@keyframes floatingCharacter {
+    0%, 100% {
+        transform: rotate(15deg) translate(0, 0);
+    }
+    25% {
+        transform: rotate(12deg) translate(2px, -2px);
+    }
+    75% {
+        transform: rotate(18deg) translate(-2px, 2px);
+    }
+}
+
+/* 图片容器特效增强 */
+.leaf-art-image,
+.paper-art-image,
+.paper-cut-image {
+    /* 保持原有样式 */
+    /* 添加古风边框 */
+    border: 1px solid rgba(167, 126, 88, 0.3);
+    /* 添加多重阴影 */
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.15),
+        0 5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 0 5px rgba(255, 255, 255, 0.5);
+    /* 添加水墨渐变 */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    /* 添加悬浮动画 */
+    animation: imageFloat 6s ease-in-out infinite;
+}
+
+/* 图片悬浮动画 */
+@keyframes imageFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(0.5deg);
+    }
+}
+
+/* 图片悬停效果增强 */
+.leaf-art-image:hover,
+.paper-art-image:hover,
+.paper-cut-image:hover {
+    transform: translateY(-15px) scale(1.03) rotate(1deg);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.2),
+        0 15px 25px rgba(0, 0, 0, 0.1),
+        inset 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* 添加水墨流动效果 */
+.leaf-art-image::before,
+.paper-art-image::before,
+.paper-cut-image::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.2) 0%,
+        transparent 50%
+    );
+    animation: inkFlow 8s linear infinite;
+}
+
+/* 水墨流动动画 */
+@keyframes inkFlow {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 文字特效增强 */
+.leaf-art-content p:first-child,
+.paper-art-content p:first-child,
+.paper-cut-content p:first-child {
+    /* 添加毛笔字效果 */
+    text-shadow: 
+        2px 2px 4px rgba(139, 0, 0, 0.2),
+        -1px -1px 2px rgba(255, 255, 255, 0.8);
+    /* 添加笔画动画 */
+    animation: brushStroke 1.5s ease-out;
+}
+
+/* 毛笔字动画 */
+@keyframes brushStroke {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+        filter: blur(4px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* 添加光晕扫过效果 */
+.leaf-art-container::after,
+.paper-art-container::after,
+.paper-cut-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: lightSweep 4s ease-in-out infinite;
+}
+
+/* 光晕扫过动画 */
+@keyframes lightSweep {
+    0% {
+        left: -100%;
+        opacity: 0.8;
+    }
+    100% {
+        left: 200%;
+        opacity: 0;
+    }
+}
+
+/* 添加点击波纹效果 */
+.leaf-art-image,
+.paper-art-image,
+.paper-cut-image {
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: rippleEffect 0.6s linear;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* 图片信息遮罩层样式增强 */
+.image-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.95),
+        rgba(0, 0, 0, 0.8) 50%,
+        transparent
+    );
+    color: white;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(4px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 遮罩层标题样式 */
+.image-overlay h4 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-family: "STXingkai", "华文行楷", serif;
+    color: var(--secondary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.1s;
+}
+
+/* 遮罩层描述文字样式 */
+.image-overlay p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: "STKaiti", "华文楷体", serif;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.2s;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 遮罩层悬停效果 */
+.leaf-art-image:hover .image-overlay,
+.paper-art-image:hover .image-overlay,
+.paper-cut-image:hover .image-overlay {
+    bottom: 0;
+    box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 遮罩层文字悬停效果 */
+.leaf-art-image:hover .image-overlay h4,
+.paper-art-image:hover .image-overlay h4,
+.paper-cut-image:hover .image-overlay h4,
+.leaf-art-image:hover .image-overlay p,
+.paper-art-image:hover .image-overlay p,
+.paper-cut-image:hover .image-overlay p {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* 添加装饰元素 */
+.image-overlay::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        var(--secondary-color),
+        transparent
+    );
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .image-overlay {
+        padding: 1.5rem;
+    }
+
+    .image-overlay h4 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .image-overlay p {
+        font-size: 1rem;
+    }
+}
+
+/* 添加水墨晕染效果 */
+.leaf-art-image,
+.paper-art-image,
+.paper-cut-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.leaf-art-image::after,
+.paper-art-image::after,
+.paper-cut-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(0, 0, 0, 0.3),
+        transparent 70%
+    );
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.leaf-art-image:hover::after,
+.paper-art-image:hover::after,
+.paper-cut-image:hover::after {
+    opacity: 1;
+}
+
+/* 文字水墨效果 */
+.leaf-art-content p,
+.paper-art-content p,
+.paper-cut-content p {
+    position: relative;
+}
+
+.leaf-art-content p::after,
+.paper-art-content p::after,
+.paper-cut-content p::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(139, 0, 0, 0.1) 20%,
+        rgba(139, 0, 0, 0.3) 50%,
+        rgba(139, 0, 0, 0.1) 80%,
+        transparent
+    );
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.5s ease;
+    filter: blur(1px);
+}
+
+.leaf-art-content p:hover::after,
+.paper-art-content p:hover::after,
+.paper-cut-content p:hover::after {
+    transform: scaleX(1);
+}
+
+/* 文字悬停水墨扩散效果 */
+.leaf-art-content p:hover,
+.paper-art-content p:hover,
+.paper-cut-content p:hover {
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* 首段文字特殊水墨效果 */
+.leaf-art-content p:first-child::before,
+.paper-art-content p:first-child::before,
+.paper-cut-content p:first-child::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(139, 0, 0, 0.1),
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
+
+.leaf-art-content p:first-child:hover::before,
+.paper-art-content p:first-child:hover::before,
+.paper-cut-content p:first-child:hover::before {
+    opacity: 1;
+}
+
+/* 统一所有图片的大小和样式 */
+.leaf-art-image img,
+.paper-art-image img,
+.paper-cut-image img {
+    width: 100%;
+    height: 300px; /* 统一设置高度 */
+    object-fit: cover;
+    border: 3px solid;
+    border-image: linear-gradient(to bottom, #8B0000, #DAA520) 1;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 统一所有图片容器的样式 */
+.leaf-art-image,
+.paper-art-image,
+.paper-cut-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+/* 统一所有图片展示区的布局 */
+.leaf-art-gallery,
+.paper-art-gallery,
+.paper-cut-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* 响应式调整 */
+@media (max-width: 576px) {
+    .leaf-art-image img,
+    .paper-art-image img,
+    .paper-cut-image img {
+        height: 250px; /* 在小屏幕上稍微减小高度 */
     }
 }
 
