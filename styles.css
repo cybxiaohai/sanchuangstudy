@@ -200,25 +200,165 @@ body {
     padding: 5rem 2rem;
 }
 
+/* 标题样式美化 */
 .section h2 {
-    font-family: "STXingkai", "华文行楷", serif;
-    font-size: 3rem;
-    color: var(--primary-color);
+    font-family: "STKaiti", "华文楷体", "楷体", serif;
+    font-size: 4.2rem;
     text-align: center;
-    margin-bottom: 3rem;
+    margin: 3rem auto;
+    padding: 2rem 0;
     position: relative;
-    padding-bottom: 1rem;
+    width: fit-content;
+    letter-spacing: 0.2em;
+    /* 增强渐变文字效果 */
+    background: linear-gradient(120deg, 
+        #8B0000, 
+        #DAA520, 
+        #8B0000, 
+        #CD853F
+    );
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientText 8s ease infinite;
+}
+
+/* 添加水墨装饰 */
+.section h2::before,
+.section h2::after {
+    content: '❖';
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+    color: var(--accent-color);
+    opacity: 0.6;
+    transform: translateY(-50%);
+    /* 使用 transform3d 来启用硬件加速 */
+    transform: translate3d(0, -50%, 0) rotate(0deg);
+    /* 使用 will-change 提前告知浏览器要变化的属性 */
+    will-change: transform;
+    /* 使用更平滑的动画曲线 */
+    animation: rotateDecor 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 添加 backface-visibility 优化性能 */
+    backface-visibility: hidden;
+    /* 添加 perspective 提升3D效果 */
+    perspective: 1000px;
+}
+
+.section h2::before {
+    left: -60px;
+}
+
+.section h2::after {
+    right: -60px;
+}
+
+/* 优化旋转动画 */
+@keyframes rotateDecor {
+    0% {
+        transform: translate3d(0, -50%, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate3d(0, -50%, 0) rotate(360deg);
+    }
+}
+
+/* 悬停效果 */
+.section h2:hover::before {
+    animation: rotateDecor 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-play-state: running;
+}
+
+.section h2:hover::after {
+    animation: rotateDecor 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-play-state: running;
+}
+
+/* 移除原有的悬停暂停效果 */
+.section h2:hover::before,
+.section h2:hover::after {
+    animation-play-state: running;
+}
+
+/* 添加两侧装饰 */
+.section h2::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -60px;
+    width: 40px;
+    height: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23A77E58'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: contain;
+    transform: translateY(-50%);
+    opacity: 0.6;
+    animation: rotateDecor 10s linear infinite;
 }
 
 .section h2::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 2px;
-    background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+    top: 50%;
+    right: -60px;
+    width: 40px;
+    height: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23A77E58'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: contain;
+    transform: translateY(-50%);
+    opacity: 0.6;
+    animation: rotateDecor 10s linear infinite reverse;
+}
+
+/* 添加光晕效果 */
+.section h2 {
+    text-shadow: 
+        0 0 10px rgba(139, 0, 0, 0.1),
+        0 0 20px rgba(139, 0, 0, 0.1),
+        0 0 30px rgba(139, 0, 0, 0.1);
+}
+
+/* 动画定义 */
+@keyframes gradientText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes expandWidth {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 100px;
+        opacity: 1;
+    }
+}
+
+@keyframes rotateDecor {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* 悬停效果 */
+.section h2:hover {
+    transform: scale(1.02);
+    text-shadow: 
+        0 0 15px rgba(139, 0, 0, 0.2),
+        0 0 30px rgba(139, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.section h2:hover::before,
+.section h2:hover::after {
+    width: 150px;
 }
 
 .content-wrapper {
@@ -514,7 +654,7 @@ footer {
     color: #FFD700;
 }
 
-/* 3D模型查看器样式 */
+/* 3D模型查���器样式 */
 model-viewer {
     width: 100%;
     height: 400px;
@@ -1022,7 +1162,7 @@ model-viewer {
     gap: 2rem;
 }
 
-/* 叶雕图片容器样式 */
+/* 叶雕图片容��样��� */
 .leaf-art-image {
     position: relative;
     overflow: hidden;
@@ -1102,7 +1242,7 @@ model-viewer {
     padding: 0 2rem;
 }
 
-/* 叶雕作品图片展示区 */
+/* 叶雕作品图片展示��� */
 .leaf-art-gallery {
     display: flex;
     flex-direction: column;
@@ -1921,7 +2061,7 @@ model-viewer {
     /* 增加古风纹理背景 */
     background: 
         linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1)),
-        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a77e58' fill-opacity='0.05'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a77e58' fill-opacity='0.05'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     /* 增强玻璃态效果 */
     backdrop-filter: blur(10px) saturate(180%);
     /* 添加多重阴影 */
@@ -1990,7 +2130,7 @@ model-viewer {
 .paper-art-image,
 .paper-cut-image {
     /* 保持原有样式 */
-    /* 添加古风边框 */
+    /* 添加���风边框 */
     border: 1px solid rgba(167, 126, 88, 0.3);
     /* 添加多重阴影 */
     box-shadow: 
@@ -2003,7 +2143,7 @@ model-viewer {
     animation: imageFloat 6s ease-in-out infinite;
 }
 
-/* 图片悬浮动画 */
+/* 图���悬浮动画 */
 @keyframes imageFloat {
     0%, 100% {
         transform: translateY(0) rotate(0deg);
@@ -2367,6 +2507,366 @@ model-viewer {
     .paper-art-image img,
     .paper-cut-image img {
         height: 250px; /* 在小屏幕上稍微减小高度 */
+    }
+}
+
+/* 分类标签容器样式 */
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+    max-width: 800px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 标签按钮样式 */
+.tab-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-family: "STKaiti", "华文楷体", serif;
+    color: var(--accent-color);
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 按钮悬停效果 */
+.tab-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(167, 126, 88, 0.3);
+    color: white;
+    background: var(--accent-color);
+}
+
+/* 激活状态样式 */
+.tab-btn.active {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 5px 15px rgba(167, 126, 88, 0.3);
+}
+
+/* 按钮点击波纹效果 */
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease-out, height 0.6s ease-out;
+}
+
+.tab-btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* 添加光晕动画 */
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: buttonLight 3s infinite;
+}
+
+@keyframes buttonLight {
+    0% {
+        transform: rotate(45deg) translateX(-100%);
+    }
+    100% {
+        transform: rotate(45deg) translateX(100%);
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .category-tabs {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 20px;
+    }
+
+    .tab-btn {
+        width: 100%;
+        padding: 0.8rem 1.5rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* 非遗建筑标签容器样式 */
+.heritage-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+    max-width: 800px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 标签按钮样式 */
+.filter-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-family: "STKaiti", "华文楷体", serif;
+    color: var(--accent-color);
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 按钮悬停效果 */
+.filter-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(167, 126, 88, 0.3);
+    color: white;
+    background: var(--accent-color);
+}
+
+/* 激活状态样式 */
+.filter-btn.active {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 5px 15px rgba(167, 126, 88, 0.3);
+}
+
+/* 按钮点击波纹效果 */
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease-out, height 0.6s ease-out;
+}
+
+.filter-btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* 添加光晕动画 */
+.filter-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: buttonLight 3s infinite;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .heritage-filters {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 20px;
+    }
+
+    .filter-btn {
+        width: 100%;
+        padding: 0.8rem 1.5rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* 艺术呈现区域的背景和容器样式增强 */
+.art-categories {
+    position: relative;
+    padding: 2rem;
+    /* 添加祥云纹理背景和动画 */
+    background-image: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M25,50 C25,35 35,25 50,25 C65,25 75,35 75,50 C75,65 65,75 50,75 C35,75 25,65 25,50 Z M45,45 C45,40 47,38 50,38 C53,38 55,40 55,45 C55,50 53,52 50,52 C47,52 45,50 45,45 Z' fill='%23A77E58' fill-opacity='0.08'/%3E%3Cpath d='M15,50 C15,30 30,15 50,15 C70,15 85,30 85,50 C85,70 70,85 50,85 C30,85 15,70 15,50 Z' stroke='%23A77E58' stroke-opacity='0.05' fill='none' stroke-width='2'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 200 200'%3E%3Cpath d='M50,100 C50,75 75,50 100,50 C125,50 150,75 150,100 C150,125 125,150 100,150 C75,150 50,125 50,100 Z M85,85 C85,70 90,65 100,65 C110,65 115,70 115,85 C115,100 110,105 100,105 C90,105 85,100 85,85 Z' fill='%23A77E58' fill-opacity='0.05'/%3E%3C/svg%3E");
+    background-size: auto, 100px 100px, 150px 150px;
+    backdrop-filter: blur(10px) saturate(180%);
+    border-radius: 20px;
+    box-shadow: 
+        0 8px 32px rgba(31, 38, 135, 0.15),
+        inset 0 0 2px rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    /* 增强祥云动画效果 */
+    animation: 
+        cloudFloat 30s linear infinite,
+        glowPulse 4s ease-in-out infinite;
+}
+
+/* 增强祥云飘动动画 */
+@keyframes cloudFloat {
+    0% {
+        background-position: 0 0, 0 0, 0 0;
+    }
+    50% {
+        background-position: 50px 25px, -50px -25px, 75px -35px;
+    }
+    100% {
+        background-position: 0 0, 0 0, 0 0;
+    }
+}
+
+/* 添加光晕脉冲动画 */
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 
+            0 8px 32px rgba(31, 38, 135, 0.15),
+            inset 0 0 2px rgba(255, 255, 255, 0.6),
+            0 0 20px rgba(167, 126, 88, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 8px 32px rgba(31, 38, 135, 0.25),
+            inset 0 0 4px rgba(255, 255, 255, 0.8),
+            0 0 40px rgba(167, 126, 88, 0.4);
+    }
+}
+
+/* 增强图片悬停动画效果 */
+.leaf-art-image img,
+.paper-art-image img,
+.paper-cut-image img {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: imagePulse 3s ease-in-out infinite;
+}
+
+@keyframes imagePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* 增强图片悬停效果 */
+.leaf-art-image:hover img,
+.paper-art-image:hover img,
+.paper-cut-image:hover img {
+    transform: scale(1.15) rotate(2deg);
+    filter: brightness(0.85) contrast(1.1);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* 增强遮罩层动画 */
+.image-overlay {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.leaf-art-image:hover .image-overlay,
+.paper-art-image:hover .image-overlay,
+.paper-cut-image:hover .image-overlay {
+    transform: translateY(0);
+    opacity: 1;
+    animation: overlayReveal 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes overlayReveal {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 增强文字动画效果 */
+.image-overlay h4,
+.image-overlay p {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.leaf-art-image:hover .image-overlay h4,
+.paper-art-image:hover .image-overlay h4,
+.paper-cut-image:hover .image-overlay h4 {
+    animation: textRise 0.6s ease-out 0.1s forwards;
+}
+
+.leaf-art-image:hover .image-overlay p,
+.paper-art-image:hover .image-overlay p,
+.paper-cut-image:hover .image-overlay p {
+    animation: textRise 0.6s ease-out 0.2s forwards;
+}
+
+@keyframes textRise {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 增强容器切换动画 */
+[style*="display: grid"] {
+    animation: containerFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes containerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
     }
 }
 
